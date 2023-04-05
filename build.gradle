@@ -1,0 +1,77 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.10'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'geekchow.spring'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+//仓库配置
+repositories {
+	//mavenLocal { setUrl("file://${project.rootDir}/lib") }
+	//首先去本地仓库找
+	mavenLocal()
+	//然后去阿里仓库找
+	// build.gradle.kts:
+	//maven {
+	//    isAllowInsecureProtocol = true
+	//    setUrl("https://maven.aliyun.com/nexus/content/groups/public/")
+	//}
+
+	// build.gradle:
+	maven {
+		setAllowInsecureProtocol(true)
+		url "https://repo.spring.io/release"
+	}
+	maven {
+		setAllowInsecureProtocol(true)
+		url "https://repo.spring.io/milestone"
+	}
+	maven {
+		//isAllowInsecureProtocol = true
+		setAllowInsecureProtocol(true)
+		url "https://maven.aliyun.com/nexus/content/groups/public/"
+	}
+	maven {
+		//isAllowInsecureProtocol = true
+		setAllowInsecureProtocol(true)
+		url "https://maven.aliyun.com/repository/public"
+	}
+	maven {
+		//isAllowInsecureProtocol = true
+		setAllowInsecureProtocol(true)
+		url "https://maven.aliyun.com/repository/google" }
+	maven {
+		//isAllowInsecureProtocol = true
+		setAllowInsecureProtocol(true)
+		url "https://maven.aliyun.com/repository/gradle-plugin" }
+	maven {
+		//isAllowInsecureProtocol = true
+		setAllowInsecureProtocol(true)
+		url "https://maven.aliyun.com/repository/spring-plugin" }
+	maven {
+		//isAllowInsecureProtocol = true
+		setAllowInsecureProtocol(true)
+		url "https://maven.aliyun.com/repository/apache-snapshots" }
+	maven {
+		//isAllowInsecureProtocol = true
+		setAllowInsecureProtocol(true)
+		url "https://oss.jfrog.org/artifactory/oss-snapshot-local/" }
+	google()
+	jcenter()
+	//最后从maven中央仓库找
+	mavenCentral()
+}
+
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'io.projectreactor:reactor-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
